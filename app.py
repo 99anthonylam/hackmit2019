@@ -1,6 +1,46 @@
 from flask import Flask, render_template, request
 import jinja2
 from collections import defaultdict
+import datetime
+
+class User:
+	def __init
+
+class Users:
+	def __init__(self):
+		self.users = {}
+
+	def add_user(self, username, password):
+		if username not in self.users:
+			self.users[username] = password
+
+	def change_pwd(self, username, old_pwd, new_pwd):
+		if username in self.users and self.users[username] == old_pwd:
+			self.users[username] = new_pwd
+
+	def del_user(self, username, password):
+		if username in self.users and self.users[username] == password:
+			self.users.pop(username)
+
+
+class Journals:
+
+
+
+class Entry:
+	def __init__(self, user):
+        self.user = user
+        self.created_at = datetime.now()
+        self.last_modified = self.created_at
+        self.content = ''
+
+    def update_entry(self, content):
+    	self.last_modified = datetime.now()
+    	self.content = content
+
+
+
+
 
 app = Flask(__name__, static_url_path='', static_folder='static')
 db = defaultdict(str)
