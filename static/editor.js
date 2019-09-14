@@ -17,7 +17,11 @@ $( document ).ready(function() {
         // Now show them we saved and when we did
         var d = new Date();
         $('#last-saved').html('Saved! Last: ' + d.toLocaleTimeString());
-        $('#curr-saved').html('Most recent text: ' + curr_data);
+
+        // Post data to Python
+        $.post( "/save", {
+            curr_text: curr_data 
+        });
     }
 
 })
