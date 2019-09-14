@@ -23,8 +23,11 @@
   </head>
 
   <body>
-    <p>New Journal Entry</p>
-    <form action="/complete" method="post">
+    <p>New Journal Entry {{ variable|length }}</p>
+    {% for i in variable %} 
+    	{{ i }}
+    {% endfor %}
+    <form action="/" method="post">
     	<input id="journal-entry" type=textarea name="journal-entry" placeholder="How was your day? How are you feeling?">
     	<input type="submit" value="Complete Entry">
     </form>
