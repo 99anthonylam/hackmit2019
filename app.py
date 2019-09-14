@@ -1,103 +1,77 @@
-from flask import Flask, render_template, request, url_for, redirect, flash, \
-session, abort
-from flask_sqlalchemy import sqlalchemy, SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask import Flask, render_template, request
 import jinja2
+from collections import defaultdict
+import datetime
+
+# class User:
+# 	def __init
+
+# class Users:
+# 	def __init__(self):
+# 		self.users = {}
+
+# 	def add_user(self, username, password):
+# 		if username not in self.users:
+# 			self.users[username] = password
+
+# 	def change_pwd(self, username, old_pwd, new_pwd):
+# 		if username in self.users and self.users[username] == old_pwd:
+# 			self.users[username] = new_pwd
+
+# 	def del_user(self, username, password):
+# 		if username in self.users and self.users[username] == password:
+# 			self.users.pop(username)
+
+
+# class Journals:
+
+
+
+# class Entry:
+# 	def __init__(self, user):
+#         self.user = user
+#         self.created_at = datetime.now()
+#         self.last_modified = self.created_at
+#         self.content = ''
+
+#     def update_entry(self, content):
+#     	self.last_modified = datetime.now()
+#     	self.content = content
+
+
+
+
 
 app = Flask(__name__, static_url_path='', static_folder='static')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////auth.db'
-app.config['SECRET_KEY'] = 'TEMP_KEY!'
+db = defaultdict(str)
+curr = 0
 
-class User(db.Model):
-    uid = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    pass_hash = db.Column(db.String(100), nullable=False)
+# create a new journal entry // display old journal entries
+@app.route('/', methods = ['GET'])
+def home():
+	# TO DO: bootstrap grid on html page to display all old entried in db
+	return render_template('home.html', variable='hello!!')
 
-    def __repr__(self):
-        return '' % self.username
+# save the current journal entry
+@app.route('/save', methods = ['POST'])
+def save_journal_entry():
+	global curr
+	text = request.form['curr_text']
+	db[curr] = str(text)
+	print(db)
 
-db.create_all()
+	return render_template('home.html')
 
-@app.route("/signup/", methods=["GET", "POST"])
-def signup():
-    if request.method == "POST":
-        username = request.form['username']
-        password = request.form['password']
+# complete the current journal entry
+@app.route('/', methods = ['POST'])
+def complete_journal_entry():
+	# TO DO: some sort of alert/verification that the post has been saved
+	global curr
+	text = request.form['journal-entry']
+	db[curr] = str(text)
+	curr += 1
+	return render_template('home.html')
 
-        if not (username and password):
-            flash("Username or Password cannot be empty")
-            return redirect(url_for('signup'))
-        else:
-            username = username.strip()
-            password = password.strip()
-
-        # Returns salted pwd hash in format : method$salt$hashedvalue
-        hashed_pwd = generate_password_hash(password, 'sha256')
-
-        new_user = User(username=username, pass_hash=hashed_pwd)
-        db.session.add(new_user)
-
-        try:
-            db.session.commit()
-        except sqlalchemy.exc.IntegrityError:
-            flash("Username {u} is not available.".format(u=username))
-            return redirect(url_for('signup'))
-
-        flash("User account has been created.")
-        return redirect(url_for("login"))
-
-    return render_template("signup.html")
-
-
-@app.route("/login/", methods=["GET", "POST"])
-def login():
-    if request.method == "POST":
-        username = request.form['username']
-        password = request.form['password']
-
-        if not (username and password):
-            flash("Username or Password cannot be empty.")
-            return redirect(url_for('login'))
-        else:
-            username = username.strip()
-            password = password.strip()
-
-        user = User.query.filter_by(username=username).first()
-
-        if user and check_password_hash(user.pass_hash, password):
-            session[username] = True
-            return redirect(url_for("user_home", username=username))
-        else:
-            flash("Invalid username or password.")
-
-    return render_template("login_form.html")
-
-
-@app.route("/user/< username>/")
-def user_home(username):
-    if not session.get(username):
-        abort(401)
-  
-    return render_template("user_home.html", username=username)
-
-
-@app.route("/logout/< username>")
-def logout(username):
-    session.pop(username, None)
-    flash("successfully logged out.")
-    return redirect(url_for('login'))
-
-
-# @app.route('/')
-# def home():
-#     # should return a home page
-#     # if not logged in, redirect to login page
-#     return render_template('home.html')
-
-# @app.route('/login')
-# def login():
-# 	return 'login/sign-up page'
 
 if __name__ == '__main__':
 	app.run('localhost', 8888, debug=True)
