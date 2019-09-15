@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sign In/Register</h1>
+    <h1 id="one" class="two">Sign In/Register</h1>
     {% if error %}
-        <p>{{ error }}</p>
+        <p class="error">{{ error }}</p>
     {% endif %}
-    <form action="/login" method="post" novalidate>
+    <form class = 'form' action="/login" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
