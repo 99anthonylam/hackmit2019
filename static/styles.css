@@ -18,18 +18,14 @@ text-align: center; }
   text-align: center;
   background: #1abc9c;
   color: white;
-  font-size: 30px;
-
-  
+  font-size: 30px;  
 }
 
 .header{
   text-align: center;
-
 }
 
 #streamButton.button{
-
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
@@ -38,6 +34,29 @@ text-align: center; }
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+
+.grid-container {
+  display: grid;
+  grid-gap: 50px;
+  grid-template-columns: auto auto auto auto;
+  background-color: #2196F3;
+  margin-top: 100px;
+  margin-bottom:100px; 
+  padding: 50px;
+  width: calc(100% - 50px);
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
  
