@@ -27,12 +27,18 @@
   </head>
 
   <body>
-    <p>New Journal Entry</p>
-    <form action="/" method="post">
-        <textarea id="journal-entry" type=textarea style="width: 1000px; height: 800px;" name="journal-entry" placeholder="How was your day? How are you feeling?"></textarea>
+
+    <div class="header">
+        <h1 >New Journal Entry</h1>
+        
+    </div>
+
+   <!--  <p id = 'header' class = 'header'></p> -->
+    <form class = 'form' action="/" method="post">
+        <textarea id="journal-entry" type=textarea style="width: 500px; height: 400px;" name="journal-entry" placeholder="How was your day? How are you feeling?"></textarea> <br>
         <input type="submit" value="Complete Entry">
     </form>
-    <button id="streamButton" onclick="doStream()">Record</button>
+    <button class = 'button' id="streamButton" onclick="doStream()">Record</button>
     <div id="last-saved"></div>
 
     <div class="old">
