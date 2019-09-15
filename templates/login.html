@@ -5,7 +5,7 @@
     {% if error %}
         <p class="error">{{ error }}</p>
     {% endif %}
-    <form action="/login" method="post" novalidate>
+    <form class = 'form' action="/login" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>

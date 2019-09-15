@@ -1,11 +1,17 @@
 
-#one.two { color: red; }
+#one.two { color: red;
+text-align: center; }
 
 .error {
   color: red;
   text-decoration: underline;
+  text-align: center;
+  margin: 0 auto 
 }
 
+.form {
+  text-align: center;
+}
 /*body {
   background: #fafafa;
   color: #333333;
