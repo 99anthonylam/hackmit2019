@@ -33,7 +33,7 @@
         </div>
 
         <form class = 'form' action="/" method="post">
-            <textarea id="journal-entry" type=textarea style="width: 500px; height: 400px;" name="journal-entry" placeholder="How was your day? How are you feeling?"></textarea> <br>
+            <textarea id="journal-entry" type=textarea style="width: 500px; height: 400px;" name="journal-entry" placeholder="How was your day? How are you feeling?">{{populate}}</textarea> <br>
             <input type="submit" value="Complete Entry">
         </form>
         <button class = 'button' id="streamButton" onclick="doStream()">Record</button>
