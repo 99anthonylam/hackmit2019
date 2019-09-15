@@ -23,7 +23,7 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <title>Journal</title>
+    <title>fuji | Journal</title>
   </head>
 
   <body>
@@ -44,18 +44,18 @@
     <div class="old">
         <form action="/past" method="post">
             {% for entry in entries %}
-        
+
                 <b><font size="30">{{entry.id}}</font></b> <i><font size="20">{{entry.created_at}} </font> </i> {{ entry.content }} <br> <br>
-        
+
             {% endfor %}
-            
+
             <br>
-            
+
             <input id="past-entry-num" type=textarea name="past-entry-num" placeholder="Enter id of previous journal entry you wish to access">
             <input type="submit" value="Enter ID">
         </form>
     </div>
-    
+
     <br>
     <br>
     <a href="/logout">Logout of your account</a>
@@ -63,4 +63,3 @@
   </body>
 
 </html>
-
