@@ -195,7 +195,16 @@ def complete_journal_entry():
         return render_template('home.html', entries=journals[curr_user])
 
 
-
+@app.route('/past', methods = ['POST'])
+def past_journal_entry():
+    global curr_entry
+    global curr_user
+    global journals
+    
+    ide = int(request.form['past-entry-num'])
+    curr_entry = journals[curr_user][ide]
+    
+    return render_template('home.html', entries=journals[curr_user])
 
 if __name__ == '__main__':
         app.secret_key = 'TEMP_KEY!'
