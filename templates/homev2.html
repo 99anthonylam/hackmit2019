@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html>
 
   <head>
@@ -10,7 +9,6 @@
     <!-- jQuery and script -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="editor.js"></script>
-    <script src="revai.js"></script>
 
     <!-- Latest compiled and minified CSS -->
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -27,32 +25,17 @@
   <body>
     <p>New Journal Entry</p>
     <form action="/" method="post">
-        <textarea id="journal-entry" type=textarea style="width: 1000px; height: 800px;" name="journal-entry" placeholder="How was your day? How are you feeling?"></textarea>
+        <input id="journal-entry" type=textarea name="journal-entry" placeholder="How was your day? How are you feeling?">
         <input type="submit" value="Complete Entry">
     </form>
-    <button id="streamButton" onclick="doStream()">Record</button>
     <div id="last-saved"></div>
 
     <div class="old">
-        <form action="/past" method="post">
-            {% for entry in entries %}
-        
-                <b><font size="30">{{entry.id}}</font></b> <i><font size="20">{{entry.created_at}} </font> </i> {{ entry.content }} <br> <br>
-        
-            {% endfor %}
-            
-            <br>
-            
-            <input id="past-entry-num" type=textarea name="past-entry-num" placeholder="Enter id of previous journal entry you wish to access">
-            <input type="submit" value="Enter ID">
-        </form>
+        {% for entry in entries %}
+                {{ entry }} <br> <br>
+        {% endfor %}
     </div>
-    
-    <br>
-    <br>
-    <a href="/logout">Logout of your account</a>
 
   </body>
 
 </html>
-
