@@ -27,14 +27,11 @@
   </head>
 
   <body>
-
     <div class="container">
         <div class="header">
-            <h1 >New Journal Entry</h1>
-            
+            <p>New Journal Entry: the current entry's ID is <font size="20">{{ currid }} </font></p>
         </div>
 
-       <!--  <p id = 'header' class = 'header'></p> -->
         <form class = 'form' action="/" method="post">
             <textarea id="journal-entry" type=textarea style="width: 500px; height: 400px;" name="journal-entry" placeholder="How was your day? How are you feeling?"></textarea> <br>
             <input type="submit" value="Complete Entry">
