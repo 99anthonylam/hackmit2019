@@ -67,7 +67,7 @@ def home():
 
         #curr_entry = len(journals.get(curr_user, []))
         curr_entry = Entry(curr_user, len(journals.get(curr_user, [])))
-        return render_template('home.html', entries=journals[curr_user])
+        return render_template('home.html', entries=journals[curr_user], currid = curr_entry.id)
 
 # check that a user is logged in before allowing them to access other pages
 @app.before_request
@@ -164,7 +164,7 @@ def save_journal_entry():
         for entry in journals[curr_user]:
             entry.printentry()
         
-        return render_template('home.html', entries=journals[curr_user])
+        return render_template('home.html', entries=journals[curr_user], currid = curr_entry.id)
 
 
 
@@ -192,7 +192,7 @@ def complete_journal_entry():
         
         
         
-        return render_template('home.html', entries=journals[curr_user])
+        return render_template('home.html', entries=journals[curr_user], currid = curr_entry.id)
 
 
 @app.route('/past', methods = ['POST'])
@@ -204,7 +204,18 @@ def past_journal_entry():
     ide = int(request.form['past-entry-num'])
     curr_entry = journals[curr_user][ide]
     
-    return render_template('home.html', entries=journals[curr_user])
+    return render_template('home.html', entries=journals[curr_user], populate=curr_entry.content, currid = curr_entry.id)
+
+@app.route('/pastclick', methods = ['POST'])
+def past_journal_entry_click():
+    global curr_entry
+    global curr_user
+    global journals
+    
+    ide = int(request.form['past-entry-num-click'])
+    curr_entry = journals[curr_user][ide]
+    
+    return render_template('home.html', entries=journals[curr_user], populate=curr_entry.content, currid = curr_entry.id)
 
 if __name__ == '__main__':
         app.secret_key = 'TEMP_KEY!'
