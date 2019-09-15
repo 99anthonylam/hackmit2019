@@ -23,41 +23,47 @@
 
     <link rel="stylesheet" href="styles.css">
 
-    <title>Journal</title>
+    <title>fuji | Journal</title>
   </head>
 
   <body>
-    <p>New Journal Entry: the current entry's ID is <font size="20">{{ currid }} </font></p>
-    
-    <form action="/" method="post">
-        <textarea id="journal-entry" type=textarea style="width: 1000px; height: 800px;" name="journal-entry" placeholder="How was your day? How are you feeling?">{{ populate }}</textarea>
-        <input type="submit" value="Complete Entry">
-    </form>
-    <button id="streamButton" onclick="doStream()">Record</button>
-    <div id="last-saved"></div>
+    <div class="container">
+        <div class="header">
+            <p>New Journal Entry: the current entry's ID is <font size="20">{{ currid }} </font></p>
+        </div>
 
-    <div class="old">
-        
-            {% for entry in entries %}
-                <form action="/pastclick" method="post">
-                <input id="past-entry-num-click "+entry.id type=button name="past-entry-num-click "+entry.id><b><font size="30">{{entry.id}}</font></b> <i><font size="14">{{entry.created_at}} </font> </i> {{ entry.content }} <br> <br>
-                </form>
-            {% endfor %}
-            
-            <br>
-        <form action="/past" method="post">
-            <input id="past-entry-num" type=textarea name="past-entry-num" placeholder="Enter id of previous journal entry you wish to access">
-            <input type="submit" value="Enter ID">
+        <form class = 'form' action="/" method="post">
+            <textarea id="journal-entry" type=textarea style="width: 500px; height: 400px;" name="journal-entry" placeholder="How was your day? How are you feeling?"></textarea> <br>
+            <input type="submit" value="Complete Entry">
         </form>
+        <button class = 'button' id="streamButton" onclick="doStream()">Record</button>
+        <div id="last-saved"></div>
+
+        {% if entries %}
+            <div class="grid-container past-entries">
+                <h3>Past Journal Entries</h3>
+                {% for entry in entries %}
+                    <div class="grid-item" id="{{ entry.id }}">
+                      <p>Last modified: {{ entry.last_modified }}</p>
+                      <br />
+                      <p>{{ entry.content }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="old">
+            <form action="/past" method="post">
+                <input id="past-entry-num" type=textarea name="past-entry-num" placeholder="Enter id of previous journal entry you wish to access">
+                <input type="submit" value="Enter ID">
+            </form>
+        </div>
+
+        <br>
+        <br>
+        <a href="/logout">Logout of your account</a>
     </div>
-    
-    <br>
-    <br>
-    <a href="/logout">Logout of your account</a>
-    <br>
-    <br>
 
   </body>
 
 </html>
-
