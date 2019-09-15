@@ -7,7 +7,13 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired
 
+import sys
+import logging
+
+
 app = Flask(__name__, static_url_path='', static_folder='static')
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 class LoginForm(FlaskForm):
         username = StringField('Username', validators=[DataRequired()])
