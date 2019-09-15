@@ -25,7 +25,7 @@ text-align: center; }
   text-align: center;
 }
 
-#streamButton.button{
+.button{
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
@@ -33,7 +33,14 @@ text-align: center; }
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
+  margin:auto;
+}
+
+#stream {
+  margin:auto;
+  width: max-content;
+  padding: 20px;
 }
 
 .grid-container {
