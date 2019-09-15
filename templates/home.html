@@ -23,15 +23,19 @@
   </head>
 
   <body>
-    <p>New Journal Entry {{ variable|length }}</p>
-    {% for i in variable %} 
-    	{{ i }}
-    {% endfor %}
+    <p>New Journal Entry</p>
     <form action="/" method="post">
     	<input id="journal-entry" type=textarea name="journal-entry" placeholder="How was your day? How are you feeling?">
     	<input type="submit" value="Complete Entry">
     </form>
     <div id="last-saved"></div>
+
+    <div class="old">
+    	{% for entry in entries %}
+    		{{ entry }}
+    	{% endfor %}
+    </div>
+    
   </body>
 
 </html>
